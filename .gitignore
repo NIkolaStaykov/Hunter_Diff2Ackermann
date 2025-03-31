@@ -1,0 +1,8 @@
+hunter_ws/*
+# Ignore ros2 build files
+*/build
+*/install
+*/log
+coding_challenge_sys_test_engineer_intern.pdf
+
+**/__pycache__/

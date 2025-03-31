@@ -1,0 +1,31 @@
+{
+    "name": "Sevensense",
+    "dockerFile": "Dockerfile",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "twxs.cmake",
+                "eamodio.gitlens",
+                "ms-vscode.cmake-tools"
+            ]
+        }
+    },
+    "runArgs": [
+        "--gpus=all",
+        "--privileged"
+    ],
+    "containerEnv": {
+        "DISPLAY": "${localEnv:DISPLAY}",
+        "XAUTHORITY": "/tmp/.Xauthority",
+        "LD_LIBRARY_PATH": "/usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu-mounted"
+    },
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.Xauthority,target=/tmp/.Xauthority,type=bind,consistency=cached",
+        "source=/usr/lib/x86_64-linux-gnu,target=/usr/lib/x86_64-linux-gnu-mounted,type=bind,consistency=cached",
+        "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
+        "source=/sys/fs/cgroup,target=/sys/fs/cgroup,type=bind,consistency=cached"
+    ],
+    "remoteUser": "root"
+}

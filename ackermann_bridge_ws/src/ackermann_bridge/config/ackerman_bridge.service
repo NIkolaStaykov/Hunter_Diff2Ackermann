@@ -1,0 +1,14 @@
+[Unit]
+Description=ROS2 Ackermann Bridge Service
+After=network-online.target
+
+[Service]
+Type=simple
+User=${USER}
+Environment="ROS_DOMAIN_ID=0"
+ExecStart=/opt/ros/ackermann_bridge/bridge_wrapper.sh
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
