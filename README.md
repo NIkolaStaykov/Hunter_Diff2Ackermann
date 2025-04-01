@@ -19,7 +19,7 @@ Let us define the following variables:
 ## Implementation
 1. To enforce physical limitations, we will consider the joint rotation limits of the individual tires and calculate a steering angle limit from that.
 2. The joint-level Ackerman control is performed by the official ackermann_steering_controller package.
-3. The Ackerman controller already enforces limitations on the maximum steering angles. We will consider the case when the global steering angle goes out of bounds and not differentiate between the individual tire angles. This limitation is acceptable since correct control is ensured and angle deviations between the induvidual tires are small.
+3. We will limit the steering angle based on the maximum joint rotation limits of the tires.
 4. We have the following topic structure:
    1. **/diff_drive/vel_cmd:** differential drive control message, *base velocities*
    2. **/cmd_vel:** ackerman control message, *linear velocity and steering angle*
