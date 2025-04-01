@@ -53,22 +53,24 @@ When using ```"{linear: {x: 1}, angular: {z: 0.5}}"``` as a differential drive c
 2. Extension **Dev Containers** needed.
 3. Install and launch the Hunter_SL gazebo simulation as instructed [here.](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/humble/hunter_se)
 ## ROS Setup
-1. Run
+1. To setup the ros package
    ``` bash
    cd ackermann_ws  
    rosdep install --from-paths src --ignore-src -r -y
-   ```
-3. Run 
-   ``` bash
-   cd ackermann_ws
    colcon build --symlink-install
+   ```
+3. To setup the systemd service
+   ``` bash
+   sudo cp install/ackermann_bridge/share/ackermann_bridge/config/ackermann_bridge.service /etc/systemd/system/
    sudo systemctl daemon-reload
    sudo systemctl enable ackermann_bridge.service
+   sudo systemctl start ackermann_bridge.service
    ```
 
 ## Testing
 1. **Direct Usage**
    ``` bash
+   cd ackermann_ws
    source install/setup.bash
    ros2 launch ackermann_bridge bridge.launch.py
    ```
@@ -81,7 +83,7 @@ When using ```"{linear: {x: 1}, angular: {z: 0.5}}"``` as a differential drive c
 2. **Systemd Verification:**
    ```
    sudo systemctl start ackermann_bridge.service
-   journalctl -u ackermann_bridge.service -f  # View live logs
+   journalctl -u ackermann_bridge.service -f
    ros2 node list  # Should show 'control_transformer'
    ```
    **Note:** The systemd verification was done directly on the host machine outside the container.

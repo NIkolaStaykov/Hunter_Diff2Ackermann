@@ -6,7 +6,7 @@ After=network-online.target
 Type=simple
 User=${USER}
 Environment="ROS_DOMAIN_ID=0"
-ExecStart=/opt/ros/ackermann_bridge/bridge_wrapper.sh
+ExecStart=/opt/ros/humble/bin/ros2 launch ackermann_bridge bridge.launch.py
 Restart=on-failure
 RestartSec=5s
 
